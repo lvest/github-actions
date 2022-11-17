@@ -1,14 +1,24 @@
 name: Main WorkFlow
 on: push
 jobs:
-  build:
+  checkout:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-  deploy:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Install Dependencies # 의존 파일 설치
+        run: yarn install
+      - name: Something
+        run: echo 'something~'
+  storybook-deploy:
+    needs: checkout
     runs-on: ubuntu-latest
     steps:
-      - name: Echo
-        run: echo '안녕하세요'
-        if: contains(github.ref, 'main')
+      - name: Build Storybook
+        run: yarn build-storybook
+      - name: Deploy Storybook
+        run: aws s3 sync ./build s3://lvest-github-actions
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    if: contains(github.ref, 'main')

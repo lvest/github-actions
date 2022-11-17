@@ -1,0 +1,14 @@
+name: Main WorkFlow
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo
+        run: echo '안녕하세요'
+        if: contains(github.ref, 'main')

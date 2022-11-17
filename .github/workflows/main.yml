@@ -2,7 +2,6 @@ name: Main WorkFlow
 on: push
 jobs:
   storybook-deploy:
-    needs: checkout
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code

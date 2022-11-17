@@ -1,19 +1,13 @@
 name: Main WorkFlow
 on: push
 jobs:
-  checkout:
+  storybook-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
       - name: Install Dependencies # 의존 파일 설치
         run: yarn install
-      - name: Something
-        run: echo 'something~'
-  storybook-deploy:
-    needs: checkout
-    runs-on: ubuntu-latest
-    steps:
       - name: Build Storybook
         run: yarn build-storybook
       - name: Deploy Storybook

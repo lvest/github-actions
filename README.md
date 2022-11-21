@@ -30,3 +30,14 @@
 - 빈번하게 반복되는 step을 재사용하기 쉽도록 만들어 놓은 것
 - 여러 workflow 간 공유 가능
 - [Github Marketplace](https://github.com/marketplace?type=actions)에서는 다른 사람들이 공유한 action 볼 수 있음
+
+---
+
+## 모노레포에서 job에 대한 default working directory 설정
+```
+  jobId:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "./경로 설정"
+```
